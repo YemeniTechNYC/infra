@@ -1,0 +1,56 @@
+---
+- name: install build tools
+  yum:
+    state: latest
+    name: "@Development tools"
+  become: true
+- name: install system packages
+  package:
+    state: latest
+    name:
+      - automake
+      - bzip2
+      - bzip2-devel
+      - cmake
+      - ctags
+      - gcc
+      - gcc-c++
+      - git
+      - gzip
+      - jq
+      - kernel-devel
+      - make
+      - nginx
+      - python3-devel
+      - redhat-rpm-config
+      - tmux
+      - vim
+      - wget
+      - zlib-devel
+- name: Ensure wheel group present
+  group:
+    name: wheel
+    state: present
+- name: ensure wheel group has sudo privileges
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: "^%wheel"
+    line: "%wheel ALL=(ALL) NOPASSWD:ALL"
+    validate: "/usr/sbin/visudo -cf %s"
+- name: add users
+  user:
+    name: "{{ item.user }}"
+  loop: "{{ users }}"
+- name: add privileged users
+  user:
+    name: "{{ item.user }}"
+    groups:
+      - "wheel"
+  loop: "{{ users }}"
+  when: item.wheel == true
+- name: add authorized_keys for users
+  authorized_key:
+    key: "https://github.com/{{ item.github_id }}.keys"
+    user: "{{ item.user }}"
+  loop: "{{ users }}"
