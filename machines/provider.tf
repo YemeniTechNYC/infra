@@ -5,6 +5,12 @@ terraform {
       version = "~> 2.0"
     }
   }
+  cloud {
+    organization = "yemenis-in-tech"
+    workspaces {
+      name = "website"
+    }
+  }
 }
 
 variable "do_token" {}
