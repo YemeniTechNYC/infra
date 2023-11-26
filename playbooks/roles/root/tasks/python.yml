@@ -18,3 +18,53 @@
   tags:
     - build
   when: ansible_distribution == 'Fedora'
+
+- name: fetch python tarballs
+  get_url:
+    url: https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version }}.tgz
+    dest: /usr/local/src/Python-{{ python_version }}.tar.gz
+    mode: 0644
+    owner: root
+    group: wheel
+  tags:
+    - build
+
+- name: extract tarball
+  unarchive:
+    src: /usr/local/src/Python-{{ python_version }}.tar.gz
+    dest: /usr/local/src
+    remote_src: yes
+  tags:
+    - build
+
+- name: configure python{{ python_version }} src with optimizations
+  command:
+    cmd: "{{ item }}"
+    chdir: /usr/local/src/Python-{{ python_version }}
+  with_items:
+    - "./configure --prefix=/usr/local --enable-optimizations"
+    - make
+    - make install
+  tags:
+    - build
+
+## cleanup src code
+- name: cleanup python src (1)
+  file:
+    path: /usr/local/src/Python-{{ python_version }}.tar.gz
+    state: absent
+  tags:
+    - cleanup
+
+- name: cleanup python src (2)
+  file:
+    path: /usr/local/src/Python-{{ python_version }}
+    state: absent
+  tags:
+    - cleanup
+
+## pip upgrade
+- name: pip upgrade
+  command: "/usr/local/bin/python{{ python_version | version_minor }} -m pip install --upgrade pip"
+  tags:
+    - build
