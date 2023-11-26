@@ -1,0 +1,19 @@
+[DEFAULT]
+backend = systemd
+bantime = 86400
+banaction = firewallcmd-ipset
+action = %(action_mwl)s
+
+[sshd]
+enabled = true
+port = ssh,sftp
+
+[nginx]
+enabled = true
+filter = apache-auth
+logpath = %(nginx_error_log)s
+
+[nginx-badbots]
+enabled = true
+filter = apache-badbots
+logpath = %(nginx_access_log)s

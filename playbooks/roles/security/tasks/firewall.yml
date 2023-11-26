@@ -1,0 +1,12 @@
+---
+- name: download firewall packages
+  package:
+    name: "{{ item }}"
+  with_items:
+    - firewalld
+    - python3-firewall
+- name: start firewall
+  service:
+    name: firewalld
+    state: started
+    enabled: yes

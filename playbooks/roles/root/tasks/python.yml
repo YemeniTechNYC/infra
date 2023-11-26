@@ -1,0 +1,20 @@
+---
+- name: install python build dependencies
+  package:
+    name:
+      - clang
+      - geos
+      - geos-devel
+      - gnutls-devel
+      - libffi-devel
+      - libmemcached-devel
+      - ncurses-devel
+      - openssl-devel
+      - pcre-devel
+      - postgresql-devel
+      - readline-devel
+      - sqlite-devel
+      - python3-devel
+  tags:
+    - build
+  when: ansible_distribution == 'Fedora'

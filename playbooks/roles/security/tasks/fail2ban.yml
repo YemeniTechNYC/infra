@@ -1,0 +1,14 @@
+---
+- name: install fail2ban system package
+  package:
+    name: fail2ban
+    state: present
+- name: upload fail2ban configuration
+  template:
+    dest: /etc/fail2ban/jail.local
+    src: jail.local
+- name: start fail2ban
+  systemd:
+    name: fail2ban
+    enabled: yes
+    state: restarted
