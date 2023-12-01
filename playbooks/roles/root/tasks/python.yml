@@ -64,6 +64,7 @@
     - cleanup
 
 - name: upgrade pip, setuptools and virtualenv
+  pip:
     name: {{ item }}
     executable: /usr/local/bin/python{{ python_version | version_minor }}
     state: latest
