@@ -63,8 +63,13 @@
   tags:
     - cleanup
 
-## pip upgrade
-- name: pip upgrade
-  command: "/usr/local/bin/python{{ python_version | version_minor }} -m pip install --upgrade pip"
+- name: upgrade pip, setuptools and virtualenv
+    name: {{ item }}
+    executable: /usr/local/bin/python{{ python_version | version_minor }}
+    state: latest
+  loop:
+    - pip
+    - setuptools
+    - virtualenv
   tags:
     - build
