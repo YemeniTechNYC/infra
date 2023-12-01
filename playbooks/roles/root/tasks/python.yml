@@ -65,7 +65,7 @@
 
 - name: upgrade pip, setuptools and virtualenv
   pip:
-    name: {{ item }}
+    name: "{{ item }}"
     executable: /usr/local/bin/python{{ python_version | version_minor }}
     state: latest
   loop:
