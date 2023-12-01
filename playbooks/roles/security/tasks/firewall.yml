@@ -2,7 +2,7 @@
 - name: download firewall packages
   package:
     name: "{{ item }}"
-  with_items:
+  loop:
     - firewalld
     - python3-firewall
 - name: start firewall

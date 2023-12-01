@@ -41,7 +41,7 @@
   command:
     cmd: "{{ item }}"
     chdir: /usr/local/src/Python-{{ python_version }}
-  with_items:
+  loop:
     - "./configure --prefix=/usr/local --enable-optimizations"
     - make
     - make install
