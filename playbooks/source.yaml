@@ -1,0 +1,6 @@
+---
+- name: configure source ami
+  hosts: source
+  roles:
+    - root
+    - security

@@ -44,6 +44,21 @@ variable "service" {
   default = "${env("SERVICE")}"
 }
 
+variable "source_snapshot" {
+  type    = string
+  default = "${env("SOURCE_SNAPSHOT")}"
+}
+
+variable "ansible_inventory_group" {
+  type    = string
+  default = "${env("ANSIBLE_INVENTORY_HOST_GROUP")}"
+}
+
+variable "ansible_playbook" {
+  type    = string
+  default = "${env("ANSIBLE_PLAYBOOK")}"
+}
+
 # "timestamp" template function replacement
 locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
 
@@ -59,9 +74,9 @@ locals {
 # build blocks. A build block runs provisioner and post-processors on a
 # source. Read the documentation for source blocks here:
 # https://www.packer.io/docs/templates/hcl_templates/blocks/source
-source "digitalocean" "web" {
+source "digitalocean" "source" {
   api_token        = "${var.do_token}"
-  image            = "fedora-38-x64"
+  image            = "${var.source_snapshot}"
   region           = "nyc1"
   size             = "s-2vcpu-4gb"
   snapshot_name    = "${local.snapshot_name}"
@@ -75,12 +90,12 @@ source "digitalocean" "web" {
 # documentation for build blocks can be found here:
 # https://www.packer.io/docs/templates/hcl_templates/blocks/build
 build {
-  sources = ["source.digitalocean.web"]
+  sources = ["source.digitalocean.source"]
 
   provisioner "ansible" {
     extra_arguments = ["--vault-password-file=${var.ansible_secret_path}", "--scp-extra-args", "'-O'"]
-    groups          = ["web"]
-    playbook_file   = "playbooks/web.yaml"
+    groups          = ["${var.ansible_inventory_group}"]
+    playbook_file   = "${var.ansible_playbook}"
   }
 
   post-processor "manifest" {
