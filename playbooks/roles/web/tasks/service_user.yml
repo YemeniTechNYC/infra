@@ -38,7 +38,7 @@
   pip:
     requirements: "/opt/{{ app.name }}/requirements.txt"
     virtualenv: "~/virtualenvs/{{ app.name }}"
-    virtualenv_python: "python{{ python_version }}"
+    virtualenv_python: "python{{ python_version | version_minor }}"
   register: app_pip
 - name: add pth file for pythonpath
   copy:
