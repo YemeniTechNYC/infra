@@ -59,6 +59,11 @@ variable "ansible_playbook" {
   default = "${env("ANSIBLE_PLAYBOOK")}"
 }
 
+variable "version" {
+  type    = string
+  default = "${env("SERVICE_VERSION")}"
+}
+
 # "timestamp" template function replacement
 locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
 
@@ -67,7 +72,7 @@ locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
 # Read the documentation for locals blocks here:
 # https://www.packer.io/docs/templates/hcl_templates/blocks/locals
 locals {
-  snapshot_name = "${var.service}-${local.timestamp}"
+  snapshot_name = "${var.service}-${var.version}"
 }
 
 # source blocks are generated from your builders; a source can be referenced in

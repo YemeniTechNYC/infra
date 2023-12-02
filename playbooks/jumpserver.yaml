@@ -1,0 +1,5 @@
+---
+- name: configure jumpserver
+  hosts: jumpserver
+  roles:
+    - security

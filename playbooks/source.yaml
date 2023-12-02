@@ -3,4 +3,3 @@
   hosts: source
   roles:
     - root
-    - security
