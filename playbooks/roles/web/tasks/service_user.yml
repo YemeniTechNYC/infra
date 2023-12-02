@@ -47,7 +47,6 @@
     owner: "{{ app.name }}"
     group: "{{ app.name }}"
     mode: 0600
-  register: env_vars_file
 - name: add environment variables
   copy:
     content: "{{ env_vars | join('\n') }}"
@@ -55,4 +54,7 @@
     owner: "{{ app.name }}"
     group: "{{ app.name }}"
     mode: 0600
+  become: true
+  become_user: root
+  become_method: sudo
   register: env_vars_file
