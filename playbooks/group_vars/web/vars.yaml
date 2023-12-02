@@ -1,7 +1,10 @@
 ---
 domain: yemenisintech.org
 env_vars:
-  - DJANGO_SETTINGS_MODULE=yit.settings
+  - "DJANGO_SETTINGS_MODULE=yit.settings"
+  - "SECRET_KEY={{ secret_key }}"
+  - "ENV=prod"
+  - "ALLOWED_HOSTS={{ allowed_hosts }}"
 app:
   name: yit
   version: 0.0.1-dev
