@@ -83,7 +83,7 @@ source "digitalocean" "source" {
   api_token        = "${var.do_token}"
   image            = "${var.source_snapshot}"
   region           = "nyc1"
-  size             = "s-2vcpu-4gb"
+  size             = "s-1vcpu-1gb"
   snapshot_name    = "${local.snapshot_name}"
   snapshot_regions = ["nyc1"]
   ssh_username     = "root"
