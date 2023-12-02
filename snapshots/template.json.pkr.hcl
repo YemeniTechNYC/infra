@@ -87,7 +87,6 @@ source "digitalocean" "source" {
   snapshot_name    = "${local.snapshot_name}"
   snapshot_regions = ["nyc1"]
   ssh_username     = "root"
-  temporary_key_pair_type = "ed25519"
   tags             = ["${var.service}"]
 }
 
