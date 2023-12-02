@@ -6,6 +6,6 @@ server {
 
   location / {
     include uwsgi_params;
-    uwsgi_pass unix:/run/{{ app.name }}/{{ app.name }}.sock;
+    uwsgi_pass unix:{{ app.socket_path }};
   }
 }

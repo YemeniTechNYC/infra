@@ -10,3 +10,4 @@ app:
   version: 0.0.1-dev
   repo_link: git@github.com:YemeniTechNYC/website.git
   uwsgi_module: yit.wsgi:application
+  socket_path: /var/run/yit.sock
