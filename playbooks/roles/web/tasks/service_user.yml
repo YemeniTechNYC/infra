@@ -40,7 +40,14 @@
     virtualenv: "~/virtualenvs/{{ app.name }}"
     virtualenv_python: "python{{ python_version }}"
   register: app_pip
-
+- name: add pth file for pythonpath
+  copy:
+    content: "/opt/{{ app.name }}"
+    dest: "{{ app_pip.virtualenv }}/lib/python{{ python_version | version_minor }}/site-packages/{{ app.name }}.pth"
+    owner: "{{ app.name }}"
+    group: "{{ app.name }}"
+    mode: 0600
+  register: env_vars_file
 - name: add environment variables
   copy:
     content: "{{ env_vars | join('\n') }}"
