@@ -20,10 +20,10 @@ variable "release" {
 
 variable "jumpserver_image_id" {
     description = "snapshot id of jumpserver"
-    default = "fedora-38-x64"
+    default = "145421706"
 }
 
 variable "web_image_id" {
     description = "snapshot id of web"
-    default = "fedora-38-x64"
+    default = "145463580"
 }
