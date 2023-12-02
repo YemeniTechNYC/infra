@@ -1,0 +1,9 @@
+---
+domain: yemenisintech.org
+env_vars:
+  - DJANGO_SETTINGS_MODULE=yit.settings
+app:
+  name: yit
+  version: 0.0.1-dev
+  repo_link: git@github.com:YemeniTechNYC/website.git
+  uwsgi_module: yit.wsgi:application

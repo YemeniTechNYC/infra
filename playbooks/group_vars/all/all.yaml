@@ -1,0 +1,6 @@
+python_version: 3.11.6
+users:
+  - user: salah
+    wheel: true
+    github_id: salah93
+    email: salahs.email@pm.me
