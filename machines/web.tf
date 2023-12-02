@@ -75,3 +75,7 @@ resource "digitalocean_loadbalancer" "www-lb" {
         path            = "/health"
     }
 }
+
+output "www_ips" {
+    value = digitalocean_droplet.www[*].ipv4_address_private
+}

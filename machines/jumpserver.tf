@@ -17,7 +17,7 @@ resource "digitalocean_droplet" "jumpserver" {
     ]
 }
 
-output "ips" {
+output "jumpserver_ips" {
     value = digitalocean_droplet.jumpserver.ipv4_address
 }
 
