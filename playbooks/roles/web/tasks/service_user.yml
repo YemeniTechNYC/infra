@@ -40,3 +40,12 @@
     virtualenv: "~/virtualenvs/{{ app.name }}"
     virtualenv_python: "python{{ python_version }}"
   register: app_pip
+
+- name: add environment variables
+  copy:
+    content: "{{ env_vars | join('\n') }}"
+    dest: "/etc/profile.d/{{ app.name }}.sh"
+    owner: "{{ app.name }}"
+    group: "{{ app.name }}"
+    mode: 0600
+  register: env_vars_file

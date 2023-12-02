@@ -43,6 +43,6 @@ module = {{ app.uwsgi_module }}
 #
 # Environment
 #
-for-readline = {{ env_vars }}
+for-readline = {{ env_vars_file.dest }}
     env = %(_)
 end-for =
