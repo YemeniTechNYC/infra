@@ -41,3 +41,4 @@ inventory.ini
 
 *.envrc
 .vault-password-file
+packer-manifest.json
