@@ -7,7 +7,7 @@ env_vars:
   - "ALLOWED_HOSTS={{ allowed_hosts }}"
 app:
   name: yit
-  version: 0.0.1-dev
+  version: "{{ app_version }}"
   repo_link: git@github.com:YemeniTechNYC/website.git
   uwsgi_module: yit.wsgi:application
   socket_path: /var/run/yit.sock

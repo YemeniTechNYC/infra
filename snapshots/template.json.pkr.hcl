@@ -97,7 +97,7 @@ build {
   sources = ["source.digitalocean.source"]
 
   provisioner "ansible" {
-    extra_arguments = ["--vault-password-file=${var.ansible_secret_path}", "--scp-extra-args", "'-O'"]
+    extra_arguments = ["--vault-password-file=${var.ansible_secret_path}", "--scp-extra-args", "'-O'", "--extra-vars", "app_version=${var.version}"]
     groups          = ["${var.ansible_inventory_group}"]
     playbook_file   = "${var.ansible_playbook}"
   }
