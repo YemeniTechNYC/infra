@@ -1,0 +1,42 @@
+---
+- name: add .ssh directory
+  file:
+    path: "/home/{{ app.name }}/.ssh"
+    state: directory
+    owner: "{{ app.name }}"
+    group: "{{ app.name }}"
+    mode: 0700
+  register: ssh_directory
+- name: add deploy key
+  copy:
+    content: "{{ private_deploy_key }}"
+    dest: "{{ ssh_directory.path }}/deploy_key"
+    owner: "{{ app.name }}"
+    group: "{{ app.name }}"
+    mode: 0600
+  register: deploy_key
+  notify:
+    - delete deploy key
+- name: create app directory
+  file:
+    state: directory
+    path: "/opt/{{ app.name }}"
+    mode: 0700
+    owner: "{{ app.name }}"
+    group: "{{ app.name }}"
+  become: true
+  become_user: root
+  become_method: sudo
+- name: clone app
+  git:
+    accept_hostkey: yes
+    dest: "/opt/{{ app.name }}"
+    repo: "{{ app.repo_link }}"
+    version: "{{ app.version }}"
+    key_file: "{{ deploy_key.dest }}"
+- name: install app requirements
+  pip:
+    requirements: "/opt/{{ app.name }}/requirements.txt"
+    virtualenv: "~/virtualenvs/{{ app.name }}"
+    virtualenv_python: "python{{ python_version }}"
+  register: app_pip

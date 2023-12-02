@@ -1,0 +1,25 @@
+---
+- name: load uwsgi
+  service:
+    name: emperor.uwsgi.service
+    state: restarted
+    enabled: true
+  become: true
+- name: load nginx
+  service:
+    name: nginx
+    state: restarted
+    enabled: true
+  become: true
+- name: delete deploy key
+  file:
+    state: absent
+    path: "{{ deploy_key.dest }}"
+  become: true
+- name: open port 80
+  firewalld:
+    port: 80/tcp
+    permanent: yes
+    immediate: yes
+    state: enabled
+  become: true

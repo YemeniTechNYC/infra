@@ -1,0 +1,11 @@
+server {
+  client_max_body_size 0;
+  server_tokens off;
+  listen 80;
+  server_name {{ domain }};
+
+  location / {
+    include uwsgi_params;
+    uwsgi_pass unix:/run/{{ app.name }}/{{ app.name }}.sock;
+  }
+}

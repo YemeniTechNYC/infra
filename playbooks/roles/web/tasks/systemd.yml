@@ -1,0 +1,8 @@
+---
+- name: add systemd service
+  template:
+    src: templates/emperor.uwsgi.service
+    dest: /etc/systemd/system/emperor.uwsgi.service
+    owner: root
+    group: root
+    mode: 0644

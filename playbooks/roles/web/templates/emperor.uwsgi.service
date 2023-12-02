@@ -1,0 +1,14 @@
+[Unit]
+Description=uWSGI Emperor
+After=syslog.target
+
+[Service]
+ExecStart={{ uwsgi_emperor.virtualenv }}/bin/uwsgi --ini /etc/uwsgi/emperor.uwsgi.ini
+RuntimeDirectory=uwsgi
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target

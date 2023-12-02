@@ -1,0 +1,48 @@
+[uwsgi]
+vaccum = true
+log-reopen = true
+thunder-lock = true
+pidfile = /var/run/{{ app.name }}.pid
+harakiri = 20
+max-requests = 5000
+vacuum = true
+
+#
+# socket config
+#
+socket = /run/{{ app.name }}/{{ app.name }}.sock
+chmod-socket=770
+chown-socket={{ app.name }}:nginx
+uid = {{ app.name }}
+gid = {{ app.name }}
+
+#
+# wsgi config
+#
+master = true
+processes = 4
+enable-threads = true
+
+#
+# Logging configuration
+#
+logto = /var/log/{{ app.name }}.log
+disable-logging = true
+
+#
+# Python configuration
+#
+virtualenv = {{ app_pip.virtualenv }}
+
+#
+# application configuration
+#
+module = {{ app.uwsgi_module }}
+
+
+#
+# Environment
+#
+for-readline = {{ env_vars }}
+    env = %(_)
+end-for =

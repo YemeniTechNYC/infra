@@ -1,0 +1,31 @@
+---
+- name: install uwsgi python package
+  pip:
+    name: ['uwsgi']
+    virtualenv: "/root/virtualenvs/uwsgi"
+    virtualenv_python: "python{{ python_version }}"
+    version: "2.0.23"
+  register: uwsgi_emperor
+- name: add service user
+  user:
+    name: "{{ app.name }}"
+    system: yes
+    create_home: yes
+  become: true
+- import_tasks: service_user.yml
+  become: true
+  become_user: "{{ app.name }}"
+  become_method: sudo
+- import_tasks: uwsgi.yml
+  become: true
+- import_tasks: nginx.yml
+  become: true
+- import_tasks: systemd.yml
+  become: true
+- name: (re)start services
+  debug:
+    msg: trigger
+  changed_when: true
+  notify:
+    - load uwsgi
+    - load nginx
