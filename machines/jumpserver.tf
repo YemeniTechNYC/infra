@@ -4,7 +4,7 @@ resource "digitalocean_vpc" "www-vpc" {
 }
 
 resource "digitalocean_droplet" "jumpserver" {
-    image              = "fedora-38-x64"
+    image              = var.image
     ipv6               = true
     monitoring         = true
     name               = "jumpserver"

@@ -17,3 +17,8 @@ variable "release" {
   description = "release version"
   default     = "0.1.0-dev"
 }
+
+variable "image" {
+    description = "image of droplet"
+    default = "fedora-38-x64"
+}
