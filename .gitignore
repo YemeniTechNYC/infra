@@ -40,4 +40,4 @@ __pycache__
 inventory.ini
 
 *.envrc
-.vault-secret-file
+.vault-password-file
