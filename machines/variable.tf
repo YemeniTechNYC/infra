@@ -18,7 +18,12 @@ variable "release" {
   default     = "0.1.0-dev"
 }
 
-variable "image" {
-    description = "image of droplet"
+variable "jumpserver_image_id" {
+    description = "snapshot id of jumpserver"
+    default = "fedora-38-x64"
+}
+
+variable "web_image_id" {
+    description = "snapshot id of web"
     default = "fedora-38-x64"
 }

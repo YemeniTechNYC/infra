@@ -4,7 +4,7 @@ resource "digitalocean_vpc" "www-vpc" {
 }
 
 resource "digitalocean_droplet" "jumpserver" {
-    image              = var.image
+    image              = var.jumpserver_image_id
     ipv6               = true
     monitoring         = true
     name               = "jumpserver"
