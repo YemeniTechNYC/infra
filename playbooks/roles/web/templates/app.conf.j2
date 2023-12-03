@@ -8,4 +8,8 @@ server {
     include uwsgi_params;
     uwsgi_pass unix:{{ app.socket_path }};
   }
+
+  location /static/ {
+    root {{ app.static_files_root | replace('/static/', '') }}
+  }
 }
