@@ -70,5 +70,5 @@
   become_method: sudo
 - name: Move static files to STATIC_ROOT
   command:
-    cmd: "export $(cat {{ env_vars_file.dest }} | xargs) && {{ app_pip.virtualenv }}/bin/python manage.py collectstatic"
+    cmd: "{{ env_vars | join(' ') }} {{ app_pip.virtualenv }}/bin/python manage.py collectstatic"
     chdir: "/opt/{{ app.name }}"
