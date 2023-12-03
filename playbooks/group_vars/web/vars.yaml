@@ -5,9 +5,11 @@ env_vars:
   - "SECRET_KEY={{ secret_key }}"
   - "ENV=prod"
   - "ALLOWED_HOSTS={{ allowed_hosts }}"
+  - "STATIC_FILES_ROOT={{ app.static_files_root }}"
 app:
   name: yit
   version: "{{ app_version }}"
   repo_link: git@github.com:YemeniTechNYC/website.git
   uwsgi_module: yit.wsgi:application
   socket_path: /var/run/yit.sock
+  static_files_root: /var/www/yemenisintech.org/static/
