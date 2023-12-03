@@ -58,3 +58,16 @@
   become_user: root
   become_method: sudo
   register: env_vars_file
+- name: create directory for static files
+  file:
+    state: directory
+    path: "{{ app.static_files_root }}"
+    mode: 0755
+    owner: "{{ app.name }}"
+    group: "{{ app.name }}"
+  become: true
+  become_user: root
+  become_method: sudo
+- name: Move static files to STATIC_ROOT
+  command: "{{ app_pip.virtualenv }}/bin/python manage.py collectstatic"
+  chdir: "/opt/{{ app.name }}"
