@@ -69,5 +69,6 @@
   become_user: root
   become_method: sudo
 - name: Move static files to STATIC_ROOT
-  command: "{{ app_pip.virtualenv }}/bin/python manage.py collectstatic"
-  chdir: "/opt/{{ app.name }}"
+  command:
+    cmd: "{{ app_pip.virtualenv }}/bin/python manage.py collectstatic"
+    chdir: "/opt/{{ app.name }}"
