@@ -64,7 +64,7 @@
     path: "{{ app.static_files_root }}"
     mode: 0755
     owner: "{{ app.name }}"
-    group: "{{ app.name }}"
+    group: "nginx"
   become: true
   become_user: root
   become_method: sudo
