@@ -10,6 +10,6 @@ server {
   }
 
   location /static/ {
-    root {{ app.static_files_root | replace('/static/', '') }}
+    root {{ app.static_files_root | replace('/static/', '') }};
   }
 }
