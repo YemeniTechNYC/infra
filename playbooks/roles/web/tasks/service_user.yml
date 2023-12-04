@@ -49,7 +49,7 @@
     mode: 0600
 - name: add environment variables
   copy:
-    content: "{{ env_vars | join('\n') }}"
+    content: "{{ env_vars.keys()|zip(env_vars.values())|map('join', '=')|join('\n') }}"
     dest: "/etc/profile.d/{{ app.name }}.sh"
     owner: "{{ app.name }}"
     group: "{{ app.name }}"
@@ -70,5 +70,6 @@
   become_method: sudo
 - name: Move static files to STATIC_ROOT
   command:
-    cmd: "{{ env_vars | join(' ') }} {{ app_pip.virtualenv }}/bin/python manage.py collectstatic"
+    cmd: "{{ app_pip.virtualenv }}/bin/python manage.py collectstatic"
     chdir: "/opt/{{ app.name }}"
+  environment: "{{ env_vars }}"

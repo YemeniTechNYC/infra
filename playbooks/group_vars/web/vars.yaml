@@ -1,11 +1,11 @@
 ---
 domain: yemenisintech.org
 env_vars:
-  - "DJANGO_SETTINGS_MODULE=yit.settings"
-  - "SECRET_KEY={{ secret_key }}"
-  - "ENV=prod"
-  - "ALLOWED_HOSTS={{ allowed_hosts }}"
-  - "STATIC_FILES_ROOT={{ app.static_files_root }}"
+  DJANGO_SETTINGS_MODULE: "yit.settings"
+  SECRET_KEY: "{{ secret_key }}"
+  ENV: "prod"
+  ALLOWED_HOSTS: "{{ allowed_hosts }}"
+  STATIC_FILES_ROOT: "{{ app.static_files_root }}"
 app:
   name: yit
   version: "{{ app_version }}"
