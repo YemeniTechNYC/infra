@@ -4,7 +4,7 @@ After=syslog.target
 
 [Service]
 ExecStart={{ uwsgi_emperor.virtualenv }}/bin/uwsgi --ini /etc/uwsgi/emperor.uwsgi.ini
-RuntimeDirectory=uwsgi
+RuntimeDirectory={{ app.runtimedirectory }}
 Restart=always
 KillSignal=SIGQUIT
 Type=notify

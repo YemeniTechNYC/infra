@@ -10,7 +10,7 @@ vacuum = true
 #
 # socket config
 #
-socket = {{ app.socket_path }}
+socket = /run/{{ app.runtimedirectory }}/{{ app.name }}.sock
 chmod-socket=770
 chown-socket={{ app.name }}:nginx
 uid = {{ app.name }}

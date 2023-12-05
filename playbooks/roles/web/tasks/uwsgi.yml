@@ -20,10 +20,3 @@
     mode: 0644
     owner: "{{ app.name }}"
     group: "{{ app.name }}"
-- name: create uwsgi sockets directory
-  file:
-    state: directory
-    path: "/run/{{ app.name }}"
-    mode: 0770
-    owner: "{{ app.name }}"
-    group: "nginx"
