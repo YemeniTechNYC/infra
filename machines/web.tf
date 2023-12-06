@@ -20,7 +20,7 @@ resource "digitalocean_firewall" "www" {
     inbound_rule {
         protocol           = "tcp"
         port_range         = "22"
-        source_droplet_ids = [digitalocean_droplet.jumpserver.id]
+        source_tags = ["jumpserver"]
     }
 
     inbound_rule {
@@ -34,6 +34,12 @@ resource "digitalocean_firewall" "www" {
         protocol              = "tcp"
         port_range            = "1-65535"
         destination_addresses = ["0.0.0.0/0", "::/0"]
+    }
+
+    outbound_rule {
+        protocol              = "udp"
+        port_range            = "514"
+        destination_tags      = ["logserver"]
     }
 }
 
@@ -66,7 +72,7 @@ resource "digitalocean_loadbalancer" "www-lb" {
         target_port     = 80
         target_protocol = "http"
 
-        certificate_id  = digitalocean_certificate.website.id
+        certificate_name  = digitalocean_certificate.website.name
     }
 
     healthcheck {

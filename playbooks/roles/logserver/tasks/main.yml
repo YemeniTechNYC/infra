@@ -1,0 +1,27 @@
+
+---
+- name: logging block
+  tags:
+    - logging
+  become: true
+  block:
+    - name: install syslog-ng
+      package:
+        name: syslog-ng
+        state: latest
+    - name: add syslog service to firewall
+      firewalld:
+        service: syslog
+        permanent: yes
+        immediate: yes
+        state: enabled
+    - name: add syslog-ng config
+      copy:
+        src: files/app.syslog.conf
+        dest: /etc/syslog-ng/conf.d/app.conf
+      notify:
+        - enable syslog-ng
+    - name: add logrotation for syslog logs
+      copy:
+        src: files/logrotate.conf
+        dest: /etc/logrotate.d/webservers
