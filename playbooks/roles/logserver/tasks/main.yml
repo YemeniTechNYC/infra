@@ -3,6 +3,7 @@
 - name: logging block
   tags:
     - logging
+  become: true
   block:
     - name: install syslog-ng
       package:
