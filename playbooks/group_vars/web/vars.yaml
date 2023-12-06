@@ -1,6 +1,6 @@
 ---
 domain: yemenisintech.org
-logserver: 167.99.2.216
+logserver: "logs.{{ domain }}"
 env_vars:
   DJANGO_SETTINGS_MODULE: "yit.settings"
   SECRET_KEY: "{{ secret_key }}"

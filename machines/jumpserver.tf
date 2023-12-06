@@ -21,6 +21,13 @@ output "jumpserver_ips" {
     value = digitalocean_droplet.jumpserver.ipv4_address
 }
 
+resource "digitalocean_record" "logs" {
+  domain = "yemenisintech.org"
+  type   = "A"
+  name   = "logs"
+  value  = digitalocean_droplet.jumpserver.ipv4_address
+}
+
 resource "digitalocean_firewall" "jumpserver" {
     droplet_ids = [digitalocean_droplet.jumpserver.id]
     name = "jumpserver-firewall"
