@@ -11,7 +11,7 @@ resource "digitalocean_droplet" "jumpserver" {
     vpc_uuid           = digitalocean_vpc.www-vpc.id
     region             = var.region
     size               = var.size
-    tags               = ["jumpserver"]
+    tags               = ["jumpserver", "jenkins", "logserver"]
     ssh_keys           = [
       data.digitalocean_ssh_key.terraform.id
     ]
@@ -29,6 +29,12 @@ resource "digitalocean_firewall" "jumpserver" {
         protocol         = "tcp"
         port_range       = "22"
         source_addresses = ["0.0.0.0/0", "::/0"]
+    }
+
+    inbound_rule {
+        protocol         = "udp"
+        port_range       = "514"
+        source_tags = ["www"]
     }
 
     outbound_rule {
