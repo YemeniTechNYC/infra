@@ -72,7 +72,7 @@ resource "digitalocean_loadbalancer" "www-lb" {
         target_port     = 80
         target_protocol = "http"
 
-        certificate_id  = digitalocean_certificate.website.id
+        certificate_name  = digitalocean_certificate.website.name
     }
 
     healthcheck {
