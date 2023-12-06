@@ -26,7 +26,9 @@ enable-threads = true
 #
 # Logging configuration
 #
-logto = /var/log/{{ app.name }}.log
+# 179 here is syslog facility * 8 + severity
+# facility=local6 (22) severity=error (3)
+logger = rsyslog:{{ logserver }}:514,uwsgiapp,179
 disable-logging = true
 
 #

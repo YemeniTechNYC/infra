@@ -3,3 +3,4 @@
   hosts: jumpserver
   roles:
     - security
+    - logserver

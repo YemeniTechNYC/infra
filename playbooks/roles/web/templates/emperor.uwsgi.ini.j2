@@ -1,4 +1,6 @@
 [uwsgi]
 emperor = /etc/uwsgi/vassals
 emperor-nofollow = 1
-logto = /var/log/emperor.log
+# 179 here is syslog facility * 8 + severity
+# facility=local6 (22) severity=error (3)
+logger = rsyslog:{{ logserver }}:514,emperor,179
