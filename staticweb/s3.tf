@@ -8,6 +8,10 @@ resource "aws_s3_bucket_website_configuration" "www_config" {
   index_document {
     suffix = "index.html"
   }
+
+  error_document {
+    key = "404.html"
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "public_access_block" {
